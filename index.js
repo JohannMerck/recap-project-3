@@ -37,3 +37,7 @@ async function fetchCharacters() {
 }
 
 fetchCharacters();
+
+import { searchBarSubmitQuery } from "./components/SearchBar/SearchBar.js";
+
+searchBarSubmitQuery();
