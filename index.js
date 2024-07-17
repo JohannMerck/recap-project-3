@@ -1,28 +1,30 @@
-import { CharacterCard } from "./components/CharacterCard/CharacterCard.js";
+import { cardContainer, searchBarContainer, searchBar, navigation, prevButton, nextButton, pagination } from "./lib/data.js";
+import { CharacterCard} from "./components/CharacterCard/CharacterCard.js";
 import { searchBarSubmitQuery } from "./components/SearchBar/SearchBar.js";
-// import { page } from "./components/NavButton/NavButton.js";
 
-const cardContainer = document.querySelector('[data-js="card-container"]');
-const searchBarContainer = document.querySelector(
-  '[data-js="search-bar-container"]'
-);
-const searchBar = document.querySelector('[data-js="search-bar"]');
-const navigation = document.querySelector('[data-js="navigation"]');
 
-const prevButton = document.querySelector('[data-js="button-prev"]');
-const nextButton = document.querySelector('[data-js="button-next"]');
-const pagination = document.querySelector('[data-js="pagination"]');
-const maxPage = 42;
 let page = 1;
+let maxPage = 42;
 
-// States
+export function pageButtons() {
+  prevButton.addEventListener("click", () => {
+    if (page > 1) {
+      page--;
+      console.log(page);
+      fetchCharacters();
+    }
+  });
 
-const searchQuery = "";
+  nextButton.addEventListener("click", () => {
+    console.log(maxPage);
+    if (page < 42 && maxPage > 1) {
+      page++;
+      console.log(page);
+      fetchCharacters();
+    }
+  });
+}
 
-// index.js
-
-//Character Card
-//Empty Container
 export async function fetchCharacters() {
   pagination.textContent = `${page} / ${maxPage}`;
   cardContainer.innerHTML = "";
@@ -37,24 +39,7 @@ export async function fetchCharacters() {
   });
 }
 
+
 fetchCharacters();
-// searchBarSubmitQuery();
-// changePage();
-
-prevButton.addEventListener("click", () => {
-  if (page > 1) {
-    page--;
-    console.log(page);
-    fetchCharacters();
-  }
-});
-
-nextButton.addEventListener("click", () => {
-  if (page < 42) {
-    page++;
-    console.log(page);
-    fetchCharacters();
-  }
-});
-
 searchBarSubmitQuery();
+pageButtons();
