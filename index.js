@@ -1,5 +1,5 @@
 import { CharacterCard } from "./components/CharacterCard/CharacterCard.js";
-// import { searchBarSubmitQuery } from "./components/SearchBar/SearchBar.js";
+import { searchBarSubmitQuery } from "./components/SearchBar/SearchBar.js";
 // import { page } from "./components/NavButton/NavButton.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
@@ -18,7 +18,6 @@ let page = 1;
 // States
 
 const searchQuery = "";
-export let source = `https://rickandmortyapi.com/api/character/?page=${page}`;
 
 // index.js
 
@@ -34,8 +33,7 @@ export async function fetchCharacters() {
   const characters = data.results;
   //Fill Data in Cards
   characters.forEach((character) => {
-    const card = CharacterCard(character);
-    cardContainer.append(card);
+    CharacterCard(character);
   });
 }
 
@@ -58,3 +56,5 @@ nextButton.addEventListener("click", () => {
     fetchCharacters();
   }
 });
+
+searchBarSubmitQuery();

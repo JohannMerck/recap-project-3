@@ -1,7 +1,10 @@
-function searchBarSubmitQuery() {
+const pagination = document.querySelector('[data-js="pagination"]');
+const cardContainer = document.querySelector('[data-js="card-container"]');
+
+export function searchBarSubmitQuery() {
   const searchBarSubmit = document.querySelector('[data-js="search-bar"]');
 
-  searchBarSubmit.addEventListener("submit", (event) => {
+  searchBarSubmit.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
@@ -9,24 +12,22 @@ function searchBarSubmitQuery() {
 
     console.log(searchQuery);
 
-    source = `${source}&name=${searchQuery}`;
+    pagination.textContent = "1 / 1";
+    cardContainer.innerHTML = "";
+    const sourceNames = "https://rickandmortyapi.com/api/character/";
+    //Fetch Data from Source
+    const response = await fetch(sourceNames);
+    const dataNames = await response.json();
+    const charactersNames = dataNames.results;
 
-    fetchCharactersviaNames();
+    console.log(charactersNames);
+    //Fill Data in Cards
+    const searchedCharacter = charactersNames.filter((character) => {
+      character.name === searchQuery;
 
-    async function fetchCharactersviaNames() {
-      pagination.textContent = `${page} / ${maxPage}`;
-      cardContainer.innerHTML = "";
-      const sourceName = `https://rickandmortyapi.com/api/character/?page=${page}&name=${searchQuery}`;
-      //Fetch Data from Source
-      const response = await fetch(sourceName);
-      const dataNames = await response.json();
-      const charactersNames = dataNames.results;
-      //Fill Data in Cards
-      charactersNames.forEach((character) => {
-        const card = characterCard(character);
-        cardContainer.append(card);
-      });
-    }
+      console.log(searchedCharacter);
+    });
+    cardContainer.append(searchedCharacter);
   });
 }
 
