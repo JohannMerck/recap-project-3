@@ -1,4 +1,6 @@
 import { CharacterCard } from "./components/CharacterCard/CharacterCard.js";
+// import { searchBarSubmitQuery } from "./components/SearchBar/SearchBar.js";
+// import { page } from "./components/NavButton/NavButton.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
@@ -6,23 +8,27 @@ const searchBarContainer = document.querySelector(
 );
 const searchBar = document.querySelector('[data-js="search-bar"]');
 const navigation = document.querySelector('[data-js="navigation"]');
+
 const prevButton = document.querySelector('[data-js="button-prev"]');
 const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
+const maxPage = 42;
+let page = 1;
+
 
 // States
-const maxPage = 1;
-const page = 1;
+
 const searchQuery = "";
-let source = "https://rickandmortyapi.com/api/character/?page=1";
+export let source = `https://rickandmortyapi.com/api/character/?page=${page}`;
 
 // index.js
 
 //Character Card
 //Empty Container
 export async function fetchCharacters() {
+  pagination.textContent = `${page} / ${maxPage}`;
   cardContainer.innerHTML = "";
-
+  const source = `https://rickandmortyapi.com/api/character/?page=${page}`;
   //Fetch Data from Source
   const response = await fetch(source);
   const data = await response.json();
@@ -35,7 +41,21 @@ export async function fetchCharacters() {
 }
 
 fetchCharacters();
+// searchBarSubmitQuery();
+// changePage();
 
-import { searchBarSubmitQuery } from "./components/SearchBar/SearchBar.js";
+prevButton.addEventListener("click", () => {
+  if (page > 1) {
+      page--;
+      console.log(page);
+      fetchCharacters();
+  }
+})
 
-searchBarSubmitQuery();
+nextButton.addEventListener("click", () => {
+  if (page < 42) {
+      page++;
+      console.log(page);
+      fetchCharacters();
+  }
+})

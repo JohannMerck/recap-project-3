@@ -1,23 +1,21 @@
-import { fetchCharacters } from "../../index.js";
-let source = "https://rickandmortyapi.com/api/character/?page=1";
+// import { fetchCharacters, source } from "../../index.js";
 
-const searchQuery = "";
-export function searchBarSubmitQuery() {
-  const searchBarSubmit = document.querySelector('[data-js="search-bar"]');
+// const searchQuery = "";
+// export function searchBarSubmitQuery() {
+//   const searchBarSubmit = document.querySelector('[data-js="search-bar"]');
 
-  searchBarSubmit.addEventListener("submit", (event) => {
-    event.preventDefault();
+//   searchBarSubmit.addEventListener("submit", (event) => {
+//     event.preventDefault();
 
-    const formData = new FormData(event.target);
-    const searchQuery = Object.fromEntries(formData);
+//     const formData = new FormData(event.target);
+//     const searchQuery = Object.fromEntries(formData);
 
-    console.log(searchQuery);
+//     console.log(searchQuery);
 
-    source = `https://rickandmortyapi.com/api/character/?page=1
- &name=${searchQuery}`;
+//     source = `${source}&name=${searchQuery}`;
 
-    fetchCharacters();
-  });
-}
+//     fetchCharacters();
+//   });
+// }
 
 // export { data }
