@@ -20,7 +20,6 @@ const searchQuery = "";
 //Character Card
 //Empty Container
 async function fetchCharacters() {
-  const cardContainer = document.getElementById("cardContainer");
   cardContainer.innerHTML = "";
 
   //Fetch Data from Source
@@ -32,7 +31,7 @@ async function fetchCharacters() {
   //Fill Data in Cards
   characters.forEach((character) => {
     const card = CharacterCard(character);
-    cardContainer.appendChild(card);
+    cardContainer.append(card);
   });
 }
 
