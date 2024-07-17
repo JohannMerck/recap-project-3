@@ -15,7 +15,6 @@ const pagination = document.querySelector('[data-js="pagination"]');
 const maxPage = 42;
 let page = 1;
 
-
 // States
 
 const searchQuery = "";
@@ -46,16 +45,16 @@ fetchCharacters();
 
 prevButton.addEventListener("click", () => {
   if (page > 1) {
-      page--;
-      console.log(page);
-      fetchCharacters();
+    page--;
+    console.log(page);
+    fetchCharacters();
   }
-})
+});
 
 nextButton.addEventListener("click", () => {
   if (page < 42) {
-      page++;
-      console.log(page);
-      fetchCharacters();
+    page++;
+    console.log(page);
+    fetchCharacters();
   }
-})
+});
