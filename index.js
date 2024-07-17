@@ -19,7 +19,6 @@ let page = 1;
 // States
 
 const searchQuery = "";
-export let source = `https://rickandmortyapi.com/api/character/?page=${page}`;
 
 // index.js
 
@@ -35,8 +34,7 @@ export async function fetchCharacters() {
   const characters = data.results;
   //Fill Data in Cards
   characters.forEach((character) => {
-    const card = CharacterCard(character);
-    cardContainer.append(card);
+    CharacterCard(character);
   });
 }
 
